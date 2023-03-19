@@ -12,7 +12,7 @@ const initialState = {
   contact: [] as Contact[],
   error: null as null | string,
   currentContactId: null as null | string,
-  currentContactSite: null as null | Contact,
+  currentContact: null as null | Contact,
 };
 
 const contactSlice = createSlice({
@@ -24,7 +24,7 @@ const contactSlice = createSlice({
       { payload }: PayloadAction<string | null | undefined>
     ) => {
       state.currentContactId = payload || null;
-      state.currentContactSite =
+      state.currentContact =
         state.contact.find(({ id }) => id === payload) || null;
     },
   },
