@@ -43,7 +43,13 @@ function Contact() {
   return (
     <>
       <Header title="Contact">
-        <button className="btn btn--primary mt-3" onClick={() => setOpen(true)}>
+        <button
+          className="btn btn--primary mt-3"
+          onClick={() => {
+            dispatch(setCurrentContact(con?.id || null));
+            setOpen(true);
+          }}
+        >
           <PencilIcon className="w-6 h-6" />
           Edit Contact
         </button>
@@ -91,9 +97,18 @@ function Contact() {
               <ShareIcon className="w-4 h-4" />
               <span>socials</span>
             </span>
-            {con?.socials?.map((s) => (
-              <span key={crypto.randomUUID()}>{crypto.randomUUID()}</span>
-            ))}
+            <div className="flex gap-2 text-2xl">
+              {con?.socials?.map((s) => (
+                <a
+                  key={crypto.randomUUID()}
+                  href={s.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <i className={s.icon}></i>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </Main>

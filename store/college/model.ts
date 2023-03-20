@@ -1,9 +1,10 @@
+import { Translate } from "@/utils/http.util";
+
 export interface College {
   id: string;
-  nameAr: string;
-  nameEn: string;
+  name: Translate;
   code: string;
-  location?: string;
+  location: Translate;
 }
 
 export interface UpdateCollege {

@@ -1,3 +1,5 @@
+import * as Yup from "yup";
+
 // const baseUrl = "https://website-api-le8m.onrender.com/api/";
 const baseUrl = "http://localhost:4000/api/";
 
@@ -54,3 +56,13 @@ export interface Translate {
   en: string;
   ar: string;
 }
+
+export const initTranslate: Translate = {
+  en: "",
+  ar: "",
+};
+
+export const translateValidationSchima = Yup.object().shape({
+  ar: Yup.string().required("Required"),
+  en: Yup.string().required("Required"),
+});

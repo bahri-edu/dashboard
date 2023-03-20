@@ -48,7 +48,7 @@ function VisionMission() {
   }
   return (
     <>
-      <Header title="News">
+      <Header title="Vision & Mission">
         <button className="btn btn--primary mt-3" onClick={() => setOpen(true)}>
           <PlusIcon className="w-6 h-6" />
           Add New Vision & Mission
@@ -58,7 +58,7 @@ function VisionMission() {
       <Modal
         open={open}
         setOpen={setOpen}
-        title="Add New College"
+        title="Add New Vision & Mission"
         width="max-w-full"
       >
         <VisionForm setClose={setOpen} />
@@ -86,7 +86,7 @@ function VisionMission() {
                   {visionMission.map((nw, x) => (
                     <SortableItem key={nw.id} id={nw.id}>
                       <td className="p-2">{x + 1}</td>
-                      <td className="p-2">{nw?.titleEn}</td>
+                      <td className="p-2">{nw?.title?.en}</td>
                       <td className="p-2">
                         <div className="flex items-center gap-2">
                           <button

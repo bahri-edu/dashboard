@@ -20,6 +20,13 @@ function InputText({ label, ...props }: any) {
         {...props}
         type={props?.type || "text"}
       />
+      <div className="h-4">
+        {error && touched ? (
+          <span className="text-red-600 transition transform  motion-reduce:transition-none ">
+            {error}
+          </span>
+        ) : null}
+      </div>
     </>
   );
 }

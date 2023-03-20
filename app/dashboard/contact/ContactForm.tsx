@@ -18,6 +18,7 @@ import {
   ArrowPathIcon,
   BookmarkSquareIcon,
   KeyIcon,
+  PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
@@ -39,6 +40,25 @@ const iconList = [
   "ri-calendar-check-line",
   "ri-stack-fill",
   "ri-quill-pen-line",
+];
+
+const icons: { icon: string; name: string }[] = [
+  {
+    icon: "ri-facebook-fill",
+    name: "facebook",
+  },
+  {
+    icon: "ri-youtube-fill",
+    name: "youtube",
+  },
+  {
+    icon: "ri-linkedin-fill",
+    name: "linkedin",
+  },
+  {
+    icon: "ri-instagram-fill",
+    name: "instagram",
+  },
 ];
 
 const validationSchema = Yup.object().shape({
@@ -80,160 +100,117 @@ function ContactForm({ setClose }: { setClose(close: boolean): void }) {
           en: currentContact?.location?.en,
         },
         email: currentContact?.email,
-        phone: [""],
+        phone: currentContact?.phone || [],
 
-        socials: [
+        socials: currentContact?.socials || [
           {
-            icon: "",
+            icon: "ri-facebook-fil",
             url: "",
           },
         ],
       }}
       onSubmit={onSubmit}
-      validationSchema={validationSchema}
+      // validationSchema={validationSchema}
     >
       {({ values }) => (
         <Form className="flex flex-col gap-4">
-          <InputText name="location.ar" placeholder="Arabic location" />
-          <InputText name="location.en" placeholder="English location" />
+          <InputTextarea name="location.ar" placeholder="Arabic location" />
+          <InputTextarea name="location.en" placeholder="English location" />
           <InputText name="email" placeholder="email " />
           <InputText name="fax" placeholder="fax " />
 
-          {/* <FieldArray name="phone">
+          <FieldArray name="phone">
             {({ insert, remove, push }) => (
-              <div className="flex flex-col gap-2">
-                {values.phone.map((p, x) => (
-                  <div
-                    className="flex items-center gap-1"
-                    key={crypto.randomUUID()}
-                  >
-                    <InputText
-                      name={`phone.${x}`}
-                      placeholder={`phone ${x + 1}`}
-                    />
-                    <TrashIcon
-                      onClick={() => remove(x)}
-                      className="w-4 h-4 cursor-pointer hover:scale-110 hover:text-red-400"
-                    />
-                  </div>
-                ))}
+              <div className="flex  flex-col gap-2 border-dashed border rounded-md p-5">
+                <span className="text-gray-300">Phons</span>
+                {values.phone.length > 0 &&
+                  values.phone.map((friend, index) => (
+                    <div className="flex items-center gap-2" key={index}>
+                      <div>
+                        <Field
+                          name={`phone.${index}`}
+                          placeholder={`phone ${index + 1}`}
+                          type="text"
+                        />
+                        <ErrorMessage
+                          name={`phone.${index}`}
+                          component="div"
+                          className="field-error"
+                        />
+                      </div>
 
+                      <div className="col">
+                        <TrashIcon
+                          onClick={() => remove(index)}
+                          className="w-6 h-6 cursor-pointer hover:scale-110 hover:text-red-400 transition-all duration-200"
+                        />
+                      </div>
+                    </div>
+                  ))}
                 <div>
                   <button
+                    type="button"
                     className="btn bg-brand-50 text-brand-600"
                     onClick={() => push("")}
                   >
-                    + add phon
+                    <PlusIcon className="w-6 h-6" />
+                    Add Phone
                   </button>
                 </div>
               </div>
             )}
-          </FieldArray> */}
+          </FieldArray>
 
-          {/* <FieldArray name="socials">
+          <FieldArray name="socials">
             {({ insert, remove, push }) => (
-              <div className="flex flex-col gap-2">
-                {values.socials.map((s, x) => (
-                  <div
-                    className="flex items-center gap-1"
-                    key={crypto.randomUUID()}
-                  >
-                    <Field
-                      name={`socials.${x}.icon`}
-                      placeholder={`icon ${x + 1}`}
-                      type="text"
-                    />
-                    <Field
-                      name={`socials.${x}.url`}
-                      placeholder={`url ${x + 1}`}
-                      type="text"
-                    />
-                    <TrashIcon
-                      onClick={() => remove(x)}
-                      className="w-4 h-4 cursor-pointer hover:scale-110 hover:text-red-400"
-                    />
-                  </div>
-                ))}
-
-                <div>
-                  <button
-                    className="btn bg-brand-50 text-brand-600"
-                    onClick={() =>
-                      push({
-                        icon: "",
-                        url: "",
-                      })
-                    }
-                  >
-                    + add phon
-                  </button>
-                </div>
-              </div>
-            )}
-          </FieldArray> */}
-
-          <FieldArray name="friends">
-            {({ insert, remove, push }) => (
-              <div>
+              <div className="flex flex-col gap-2 border-dashed border rounded-md p-5">
+                <span className="text-gray-300">Social Media</span>
                 {values.socials.length > 0 &&
                   values.socials.map((socia, index) => (
-                    <div className="row" key={index}>
+                    <div className="flex items-center gap-2" key={index}>
                       <div className="col">
                         <Field
+                          className="appearance-none"
+                          as="select"
                           name={`socials.${index}.icon`}
                           placeholder="icon"
-                          type="text"
-                        />
+                        >
+                          {icons.map((icon) => (
+                            <option key={crypto.randomUUID()} value={icon.icon}>
+                              {icon.name}
+                            </option>
+                          ))}
+                        </Field>
                       </div>
                       <div className="col">
                         <Field
                           name={`socials.${index}.url`}
                           placeholder="jurl"
-                          type="email"
+                          type="text"
                         />
                       </div>
                       <div className="col">
-                        <button
-                          type="button"
-                          className="secondary"
+                        <TrashIcon
                           onClick={() => remove(index)}
-                        >
-                          X
-                        </button>
+                          className="w-6 h-6 cursor-pointer hover:scale-110 hover:text-red-400 transition-all duration-200"
+                        />
                       </div>
                     </div>
                   ))}
-                <button
-                  type="button"
-                  className="secondary"
-                  onClick={() => push({ icon: "", url: "" })}
-                >
-                  Add Friend
-                </button>
+                <div>
+                  <button
+                    type="button"
+                    className="btn bg-brand-50 text-brand-600 "
+                    onClick={() => push({ icon: "ri-facebook-fil", url: "" })}
+                  >
+                    <PlusIcon className="w-6 h-6" />
+                    Add Social Media
+                  </button>
+                </div>
               </div>
             )}
           </FieldArray>
 
-          <div>
-            <div className="flex flex-col  items-center justify-center bg-gray-100 p-5">
-              <div className="mx-auto max-w-6xl px-12">
-                <div className="flex flex-wrap gap-3">
-                  {/* {iconList.map((icon) => (
-                    <InputRadio
-                      key={icon}
-                      name="icon"
-                      value={icon}
-                      checked={
-                        icon == currentContact?.    || values?.icon == icon
-                      }
-                    >
-                      <i className={`${icon} text-2xl`}></i>
-                    </InputRadio>
-                  ))} */}
-                </div>
-              </div>
-            </div>
-          </div>
           <div>
             <button type="submit" className="btn btn--primary gap-1">
               {loading && <ArrowPathIcon className="w-5 animate-spin" />}

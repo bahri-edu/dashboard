@@ -63,7 +63,7 @@ function College() {
               {colleges.map((college, x) => (
                 <tr key={college.id}>
                   <td className="p-2">{x + 1}</td>
-                  <td className="p-2">{college?.nameEn}</td>
+                  <td className="p-2">{college?.name?.en}</td>
                   <td className="p-2">{college?.code}</td>
                   <td className="p-2">
                     <div className="flex items-center gap-2">

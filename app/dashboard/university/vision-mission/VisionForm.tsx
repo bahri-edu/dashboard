@@ -7,6 +7,7 @@ import {
   updateVisionMission,
   useVisionMission,
 } from "@/store/university";
+import { initTranslate, translateValidationSchima } from "@/utils/http.util";
 import {
   ArrowPathIcon,
   BookmarkSquareIcon,
@@ -17,10 +18,8 @@ import React, { useState } from "react";
 import * as Yup from "yup";
 
 const newsSchema = Yup.object().shape({
-  titleAr: Yup.string().required("Arabic title Required"),
-  titleEn: Yup.string().required("English title Required"),
-  descriptionAr: Yup.string().required("Arabic Description  Required"),
-  descriptionEn: Yup.string().required("English Descripption Required"),
+  title: translateValidationSchima,
+  description: translateValidationSchima,
 });
 
 function VisionForm({ setClose }: { setClose(close: boolean): void }) {
@@ -52,10 +51,8 @@ function VisionForm({ setClose }: { setClose(close: boolean): void }) {
   return (
     <Formik
       initialValues={{
-        titleAr: currentVisionMission?.titleAr || "",
-        titleEn: currentVisionMission?.titleEn || "",
-        descriptionAr: currentVisionMission?.descriptionAr || "",
-        descriptionEn: currentVisionMission?.descriptionEn || "",
+        title: currentVisionMission?.title || initTranslate,
+        description: currentVisionMission?.description || initTranslate,
       }}
       onSubmit={onSubmit}
       validationSchema={newsSchema}
@@ -63,19 +60,19 @@ function VisionForm({ setClose }: { setClose(close: boolean): void }) {
       {
         <Form className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div>
-            <InputText name="titleAr" placeholder="Arabic Title" />
+            <InputText name="title.ar" placeholder="Arabic Title" />
             <InputTextarea
-              name="descriptionAr"
+              name="description.ar"
               rows={10}
               placeholder="Arabic Content"
             />
           </div>
 
           <div>
-            <InputText name="titleEn" placeholder="English Title" />
+            <InputText name="title.en" placeholder="English Title" />
 
             <InputTextarea
-              name="descriptionEn"
+              name="description.en"
               rows={10}
               placeholder="English Content"
             />

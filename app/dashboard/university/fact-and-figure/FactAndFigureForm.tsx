@@ -9,17 +9,17 @@ import {
   updateFactAndFigure,
   useFactAndFigure,
 } from "@/store/university";
+import { initTranslate, translateValidationSchima } from "@/utils/http.util";
 import { ArrowPathIcon, BookmarkSquareIcon } from "@heroicons/react/24/outline";
 import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
 
-const newsSchema = Yup.object().shape({
+const validationSchema = Yup.object().shape({
   count: Yup.number()
     .typeError("count  must be a number")
     .required("count Required"),
-  descriptionAr: Yup.string().required("Arabic Description  Required"),
-  descriptionEn: Yup.string().required("English Descripption Required"),
+  description: translateValidationSchima,
   type: Yup.string().required("Fact Type Required"),
 });
 
@@ -53,24 +53,23 @@ function FactAndFigureForm({ setClose }: { setClose(close: boolean): void }) {
     <Formik
       initialValues={{
         count: currentFactAndFigure?.count || null,
-        descriptionAr: currentFactAndFigure?.descriptionAr || "",
-        descriptionEn: currentFactAndFigure?.descriptionEn || "",
+        description: currentFactAndFigure?.description || initTranslate,
         type: currentFactAndFigure?.type || "",
       }}
       onSubmit={onSubmit}
-      validationSchema={newsSchema}
+      validationSchema={validationSchema}
     >
       {
         <Form className="flex flex-col gap-4">
           <InputText type="number" name="count" placeholder="Count" />
           <InputTextarea
-            name="descriptionAr"
+            name="description.ar"
             rows={5}
             placeholder="Arabic Description"
           />
 
           <InputTextarea
-            name="descriptionEn"
+            name="description.en"
             rows={5}
             placeholder="English Description"
           />

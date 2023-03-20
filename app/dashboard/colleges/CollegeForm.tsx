@@ -3,6 +3,7 @@ import InputText from "@/components/InputText";
 import InputTextarea from "@/components/InputTextarea";
 import { useAppDispatch } from "@/store";
 import { createCollege, updateCollege, useCollege } from "@/store/college";
+import { initTranslate } from "@/utils/http.util";
 import {
   ArrowPathIcon,
   BookmarkSquareIcon,
@@ -12,9 +13,15 @@ import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
 
-const collegeSchema = Yup.object().shape({
-  nameAr: Yup.string().required("Required"),
-  nameEn: Yup.string().required("Required"),
+const validationSchema = Yup.object().shape({
+  name: Yup.object().shape({
+    ar: Yup.string().required("Required"),
+    en: Yup.string().required("Required"),
+  }),
+  location: Yup.object().shape({
+    ar: Yup.string().required("Required"),
+    en: Yup.string().required("Required"),
+  }),
   code: Yup.string().min(2, "Too Short!").required("Required"),
 });
 
@@ -48,23 +55,31 @@ function CollegeForm({ setClose }: { setClose(close: boolean): void }) {
   return (
     <Formik
       initialValues={{
-        nameAr: currentCollege?.nameAr || "",
-        nameEn: currentCollege?.nameEn || "",
+        name: currentCollege?.name || initTranslate,
+        location: currentCollege?.location || initTranslate,
         code: currentCollege?.code || "",
-        location: currentCollege?.location || "",
       }}
       onSubmit={onSubmit}
-      validationSchema={collegeSchema}
+      validationSchema={validationSchema}
     >
       {
         <Form className="flex flex-col  bg-white p-8 rounded-xl">
           {/* <h1 className="text-2xl font-bold text-gray-700 my-2">
             Add New College
           </h1> */}
-          <InputText name="nameAr" placeholder="Arabic Name" />
-          <InputText name="nameEn" placeholder="English Name" />
+          <InputText name="name.ar" placeholder="Arabic Name" />
+          <InputText name="name.en" placeholder="English Name" />
           <InputText name="code" placeholder="Code" />
-          <InputTextarea name="location" rows={5} placeholder="Location" />
+          <InputTextarea
+            name="location.ar"
+            rows={5}
+            placeholder="Arabic Location"
+          />
+          <InputTextarea
+            name="location.en"
+            rows={5}
+            placeholder="English Location"
+          />
 
           <div>
             <button type="submit" className="btn btn--primary gap-1">

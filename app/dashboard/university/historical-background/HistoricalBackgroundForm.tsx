@@ -7,16 +7,15 @@ import {
   updateHistoricalBackground,
   useHistoricalBackground,
 } from "@/store/university";
+import { initTranslate, translateValidationSchima } from "@/utils/http.util";
 import { ArrowPathIcon, BookmarkSquareIcon } from "@heroicons/react/24/outline";
 import { Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
 
-const newsSchema = Yup.object().shape({
-  titleAr: Yup.string().required("Arabic title Required"),
-  titleEn: Yup.string().required("English title Required"),
-  descriptionAr: Yup.string().required("Arabic Description  Required"),
-  descriptionEn: Yup.string().required("English Descripption Required"),
+const validationSchema = Yup.object().shape({
+  title: translateValidationSchima,
+  description: translateValidationSchima,
 });
 
 function HistoricalBackgroundForm({
@@ -59,30 +58,28 @@ function HistoricalBackgroundForm({
   return (
     <Formik
       initialValues={{
-        titleAr: currentHistoricalBackground?.titleAr || "",
-        titleEn: currentHistoricalBackground?.titleEn || "",
-        descriptionAr: currentHistoricalBackground?.descriptionAr || "",
-        descriptionEn: currentHistoricalBackground?.descriptionEn || "",
+        title: currentHistoricalBackground?.title || initTranslate,
+        description: currentHistoricalBackground?.description || initTranslate,
       }}
       onSubmit={onSubmit}
-      validationSchema={newsSchema}
+      validationSchema={validationSchema}
     >
       {
         <Form className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div>
-            <InputText name="titleAr" placeholder="Arabic Title" />
+            <InputText name="title.ar" placeholder="Arabic Title" />
             <InputTextarea
-              name="descriptionAr"
+              name="description.ar"
               rows={10}
               placeholder="Arabic Content"
             />
           </div>
 
           <div>
-            <InputText name="titleEn" placeholder="English Title" />
+            <InputText name="title.en" placeholder="English Title" />
 
             <InputTextarea
-              name="descriptionEn"
+              name="description.en"
               rows={10}
               placeholder="English Content"
             />

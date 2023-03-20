@@ -39,7 +39,7 @@ function FactAndFigure() {
 
   return (
     <>
-      <Header title="News">
+      <Header title="Fact And Figure">
         <button className="btn btn--primary mt-3" onClick={() => setOpen(true)}>
           <PlusIcon className="w-6 h-6" />
           Add Fact And Figure
@@ -66,7 +66,7 @@ function FactAndFigure() {
                 <tr key={nw.id}>
                   <td className="p-2">{x + 1}</td>
                   <td className="p-2">{nw?.count}</td>
-                  <td className="p-2">{nw?.descriptionEn}</td>
+                  <td className="p-2">{nw?.description?.en}</td>
                   <td className="p-2">
                     {nw.type === FactType.STAFF ? (
                       <span className="bg-blue-100 p-1 rounded-lg text-blue-600">

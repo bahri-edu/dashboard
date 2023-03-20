@@ -92,7 +92,7 @@ function Eservice() {
                               className={`${nw.icon} text-brand-600 text-2xl`}
                             ></i>
                           )}
-                          {nw?.titleEn}
+                          {nw?.title?.en}
                         </div>
                       </td>
                       <td className="p-2">

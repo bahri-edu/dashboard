@@ -1,7 +1,8 @@
+import { Translate } from "@/utils/http.util";
+
 export interface EService {
   id: string;
-  titleAr: string;
-  titleEn: string;
+  title: Translate;
   icon: string;
   seqNo: number;
 }

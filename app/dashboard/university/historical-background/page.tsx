@@ -59,8 +59,7 @@ function HistoricalBackground() {
             <thead className="text-xs font-semibold uppercase text-gray-600 bg-gray-100">
               <tr>
                 <th className="p-2 font-semibold text-left">#</th>
-                <th className="p-2 font-semibold text-left">Name</th>
-                <th className="p-2 font-semibold text-left">Code</th>
+                <th className="p-2 font-semibold text-left">title</th>
                 <th className="p-2 font-semibold text-left">Action</th>
               </tr>
             </thead>
@@ -68,8 +67,7 @@ function HistoricalBackground() {
               {historicalBackground.map((nw, x) => (
                 <tr key={nw.id}>
                   <td className="p-2">{x + 1}</td>
-                  <td className="p-2">{nw?.titleEn}</td>
-                  <td className="p-2">{nw?.titleAr}</td>
+                  <td className="p-2">{nw?.title?.en}</td>
                   <td className="p-2">
                     <div className="flex items-center gap-2">
                       <button

@@ -1,9 +1,9 @@
+import { Translate } from "@/utils/http.util";
+
 export interface News {
   id: string;
-  titleAr: string;
-  titleEn: string;
-  descriptionAr: string;
-  descriptionEn: string;
+  title: Translate;
+  description: Translate;
   type: NewsTypeEnum;
   images?: string[];
 }

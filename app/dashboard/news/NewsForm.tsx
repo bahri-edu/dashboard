@@ -14,12 +14,15 @@ import { Form, Formik } from "formik";
 import React, { useState } from "react";
 import * as Yup from "yup";
 
-const newsSchema = Yup.object().shape({
-  titleAr: Yup.string().required("Arabic title Required"),
-  titleEn: Yup.string().required("English title Required"),
-  descriptionAr: Yup.string().required("Arabic Description  Required"),
-  descriptionEn: Yup.string().required("English Descripption Required"),
-  // images: Yup.array().min(1, "image require "),
+const validationSchema = Yup.object().shape({
+  title: Yup.object().shape({
+    ar: Yup.string().required("Arabic title Required"),
+    en: Yup.string().required("english title Required"),
+  }),
+  description: Yup.object().shape({
+    ar: Yup.string().required("Arabic description Required"),
+    en: Yup.string().required("english description Required"),
+  }),
 });
 
 function NewsForm({ setClose }: { setClose(close: boolean): void }) {
@@ -50,32 +53,30 @@ function NewsForm({ setClose }: { setClose(close: boolean): void }) {
   return (
     <Formik
       initialValues={{
-        titleAr: currentNews?.titleAr || "",
-        titleEn: currentNews?.titleEn || "",
-        descriptionAr: currentNews?.descriptionAr || "",
-        descriptionEn: currentNews?.descriptionEn || "",
+        title: currentNews?.title || { ar: "", en: "" },
+        description: currentNews?.description || { ar: "", en: "" },
         type: currentNews?.type || NewsTypeEnum.GENERAL,
         images: currentNews?.images || [],
       }}
       onSubmit={onSubmit}
-      validationSchema={newsSchema}
+      validationSchema={validationSchema}
     >
       {({ setValues, values }) => (
         <Form className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div>
-            <InputText name="titleAr" placeholder="Arabic Title" />
+            <InputText name="title.ar" placeholder="Arabic Title" />
             <InputTextarea
-              name="descriptionAr"
+              name="description.ar"
               rows={10}
               placeholder="Arabic Content"
             />
           </div>
 
           <div>
-            <InputText name="titleEn" placeholder="English Title" />
+            <InputText name="title.en" placeholder="English Title" />
 
             <InputTextarea
-              name="descriptionEn"
+              name="description.en"
               rows={10}
               placeholder="English Content"
             />

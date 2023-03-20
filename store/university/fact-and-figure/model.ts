@@ -1,8 +1,9 @@
+import { Translate } from "@/utils/http.util";
+
 export interface FactAndFigure {
   id: string;
   count: number;
-  descriptionAr: string;
-  descriptionEn: string;
+  description: Translate;
   type: FactType;
 }
 

@@ -13,6 +13,7 @@ import {
   updateVisionMission,
   useVisionMission,
 } from "@/store/university";
+import { initTranslate, translateValidationSchima } from "@/utils/http.util";
 import {
   ArrowPathIcon,
   BookmarkSquareIcon,
@@ -40,8 +41,7 @@ const iconList = [
 ];
 
 const newsSchema = Yup.object().shape({
-  titleAr: Yup.string().required("Arabic title Required"),
-  titleEn: Yup.string().required("English title Required"),
+  title: translateValidationSchima,
   // icon: Yup.string().required("icon Required"),
 });
 
@@ -73,8 +73,7 @@ function EserviceForm({ setClose }: { setClose(close: boolean): void }) {
   return (
     <Formik
       initialValues={{
-        titleAr: currentEService?.titleAr || "",
-        titleEn: currentEService?.titleEn || "",
+        title: currentEService?.title || initTranslate,
         icon: currentEService?.icon || "",
       }}
       onSubmit={onSubmit}
@@ -82,8 +81,8 @@ function EserviceForm({ setClose }: { setClose(close: boolean): void }) {
     >
       {({ values }) => (
         <Form className="flex flex-col gap-4">
-          <InputText name="titleAr" placeholder="Arabic Title" />
-          <InputText name="titleEn" placeholder="English Title" />
+          <InputText name="title.ar" placeholder="Arabic Title" />
+          <InputText name="title.en" placeholder="English Title" />
 
           <div>
             <div className="flex flex-col  items-center justify-center bg-gray-100 p-5">
