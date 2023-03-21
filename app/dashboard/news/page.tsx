@@ -74,7 +74,7 @@ function News() {
                       />
                     )}
                   </td>
-                  <td className="p-2">{nw?.title["en"]}</td>
+                  <td className="p-2">{nw?.title?.["en"]}</td>
                   <td className="p-2">{nw?.type}</td>
                   <td className="p-2">
                     <div className="flex items-center gap-2">
