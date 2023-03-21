@@ -176,7 +176,7 @@ function ContactForm({ setClose }: { setClose(close: boolean): void }) {
                           placeholder="icon"
                         >
                           {icons.map((icon) => (
-                            <option key={crypto.randomUUID()} value={icon.icon}>
+                            <option key={icon.icon} value={icon.icon}>
                               {icon.name}
                             </option>
                           ))}

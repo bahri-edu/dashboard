@@ -99,12 +99,7 @@ function Contact() {
             </span>
             <div className="flex gap-2 text-2xl">
               {con?.socials?.map((s) => (
-                <a
-                  key={crypto.randomUUID()}
-                  href={s.url}
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a key={s.url} href={s.url} target="_blank" rel="noreferrer">
                   <i className={s.icon}></i>
                 </a>
               ))}
