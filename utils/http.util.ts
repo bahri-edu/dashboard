@@ -1,9 +1,9 @@
 import * as Yup from "yup";
 
 // const baseUrl = "https://website-api-le8m.onrender.com/api/";
-const baseUrl = "http://localhost:4000/api/";
+const baseUrl = "http://164.92.186.47:4000/api/";
 
-export const uploadFileUrl = "https://upload-service.onrender.com/";
+export const uploadFileUrl = "https://164.92.186.47:4004/";
 
 export interface HttpRequestOptions {
   method?: string;
