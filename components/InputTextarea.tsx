@@ -7,7 +7,7 @@ function InputTextarea({ label, ...props }: any) {
 
   const { error, touched } = meta;
   return (
-    <>
+    <div>
       <textarea
         className="
         block
@@ -26,7 +26,7 @@ function InputTextarea({ label, ...props }: any) {
           </span>
         ) : null}
       </div>
-    </>
+    </div>
   );
 }
 

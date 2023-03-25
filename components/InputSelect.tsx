@@ -7,7 +7,8 @@ function InputSelect({ options = [], label, ...props }: any) {
 
   const { error, touched } = meta;
   return (
-    <>
+    <div className="flex flex-col gap-1">
+      {label && <label className="text-gray-400 ">{label}</label>}
       <select
         className="
         block
@@ -37,7 +38,7 @@ function InputSelect({ options = [], label, ...props }: any) {
           </span>
         ) : null}
       </div>
-    </>
+    </div>
   );
 }
 

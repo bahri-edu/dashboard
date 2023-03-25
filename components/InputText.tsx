@@ -7,7 +7,8 @@ function InputText({ label, ...props }: any) {
 
   const { error, touched } = meta;
   return (
-    <>
+    <div className="flex flex-col gap-1">
+      {label && <label className="text-gray-400 ">{label}</label>}
       <input
         className="
         block
@@ -27,7 +28,7 @@ function InputText({ label, ...props }: any) {
           </span>
         ) : null}
       </div>
-    </>
+    </div>
   );
 }
 

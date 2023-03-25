@@ -44,7 +44,12 @@ function College() {
           Add new College
         </button>
       </Header>
-      <Modal open={open} setOpen={setOpen} title="Add New College">
+      <Modal
+        open={open}
+        setOpen={setOpen}
+        title="Add New College"
+        width="max-w-4xl"
+      >
         <CollegeForm setClose={setOpen} />
       </Modal>
 

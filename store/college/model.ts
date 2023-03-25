@@ -4,10 +4,26 @@ export interface College {
   id: string;
   name: Translate;
   code: string;
-  location: Translate;
+  introduction: Translate;
+  info: CollegeInfo;
+  counter: Counter;
 }
 
 export interface UpdateCollege {
   id: string;
   college: Partial<College>;
+}
+
+export interface CollegeInfo {
+  vision: Translate;
+  academicQualification: Translate;
+  bachelorProgram: Translate;
+  registrationStep: Translate;
+  collegeDepartment: Translate[];
+}
+
+export interface Counter {
+  student: number;
+  department: number;
+  staff: number;
 }

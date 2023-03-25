@@ -59,7 +59,7 @@ function VisionMission() {
         open={open}
         setOpen={setOpen}
         title="Add New Vision & Mission"
-        width="max-w-full"
+        width="max-w-5xl"
       >
         <VisionForm setClose={setOpen} />
       </Modal>
@@ -86,7 +86,14 @@ function VisionMission() {
                   {visionMission.map((nw, x) => (
                     <SortableItem key={nw.id} id={nw.id}>
                       <td className="p-2">{x + 1}</td>
-                      <td className="p-2">{nw?.title?.en}</td>
+                      <td className="p-2">
+                        {nw?.icon && (
+                          <i
+                            className={`${nw.icon} text-brand-600 text-2xl`}
+                          ></i>
+                        )}
+                        {nw?.title?.en}
+                      </td>
                       <td className="p-2">
                         <div className="flex items-center gap-2">
                           <button
