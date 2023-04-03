@@ -14,6 +14,7 @@ import {
   updateVisionMission,
   useVisionMission,
 } from "@/store/university";
+import { socialIcons } from "@/utils/icons.util";
 import {
   ArrowPathIcon,
   BookmarkSquareIcon,
@@ -40,25 +41,6 @@ const iconList = [
   "ri-calendar-check-line",
   "ri-stack-fill",
   "ri-quill-pen-line",
-];
-
-const icons: { icon: string; name: string }[] = [
-  {
-    icon: "ri-facebook-fill",
-    name: "facebook",
-  },
-  {
-    icon: "ri-youtube-fill",
-    name: "youtube",
-  },
-  {
-    icon: "ri-linkedin-fill",
-    name: "linkedin",
-  },
-  {
-    icon: "ri-instagram-fill",
-    name: "instagram",
-  },
 ];
 
 const validationSchema = Yup.object().shape({
@@ -175,7 +157,7 @@ function ContactForm({ setClose }: { setClose(close: boolean): void }) {
                           name={`socials.${index}.icon`}
                           placeholder="icon"
                         >
-                          {icons.map((icon) => (
+                          {socialIcons.map((icon) => (
                             <option key={icon.icon} value={icon.icon}>
                               {icon.name}
                             </option>

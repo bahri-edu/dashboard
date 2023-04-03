@@ -1,5 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import {
+  currentAdministrationReducer,
+  universityAdministrationReducer,
+  viceChancellorMessageReducer,
+} from "./administration";
 import { collegeReducer } from "./college";
 import { contactReducer } from "./contact";
 import { eServiceReducer } from "./electronic-service";
@@ -9,7 +14,9 @@ import {
   visionMissionReducer,
   historicalBackgroundReducer,
   factAndFigureReducer,
+  uploadFileReducer,
 } from "./university";
+import { logoReducer } from "./university/logo";
 
 const store = configureStore({
   reducer: {
@@ -21,6 +28,11 @@ const store = configureStore({
     eService: eServiceReducer,
     relatedSite: relatedSiteReducer,
     contact: contactReducer,
+    logo: logoReducer,
+    uploadFile: uploadFileReducer,
+    viceChancellorMessage: viceChancellorMessageReducer,
+    currentAdministration: currentAdministrationReducer,
+    universityAdministration: universityAdministrationReducer,
   },
   devTools: true,
 });

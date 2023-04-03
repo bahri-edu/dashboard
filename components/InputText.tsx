@@ -8,7 +8,10 @@ function InputText({ label, ...props }: any) {
   const { error, touched } = meta;
   return (
     <div className="flex flex-col gap-1">
-      {label && <label className="text-gray-400 ">{label}</label>}
+      {(label && <label className="text-gray-400 ">{label}</label>) ||
+        (props?.placeholder && (
+          <label className="text-gray-400 ">{props.placeholder}</label>
+        ))}
       <input
         className="
         block

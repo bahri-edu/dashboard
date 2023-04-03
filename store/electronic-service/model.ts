@@ -4,6 +4,7 @@ export interface EService {
   id: string;
   title: Translate;
   icon: string;
+  url: string;
   seqNo: number;
 }
 

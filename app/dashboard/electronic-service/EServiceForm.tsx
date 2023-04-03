@@ -42,6 +42,7 @@ const iconList = [
 
 const newsSchema = Yup.object().shape({
   title: translateValidationSchima,
+  url: Yup.string().required("url Required"),
   // icon: Yup.string().required("icon Required"),
 });
 
@@ -74,6 +75,7 @@ function EserviceForm({ setClose }: { setClose(close: boolean): void }) {
     <Formik
       initialValues={{
         title: currentEService?.title || initTranslate,
+        url: currentEService?.url || "#",
         icon: currentEService?.icon || "",
       }}
       onSubmit={onSubmit}
@@ -83,6 +85,7 @@ function EserviceForm({ setClose }: { setClose(close: boolean): void }) {
         <Form className="flex flex-col gap-4">
           <InputText name="title.ar" placeholder="Arabic Title" />
           <InputText name="title.en" placeholder="English Title" />
+          <InputText name="url" placeholder="Url" />
 
           <div>
             <div className="flex flex-col  items-center justify-center bg-gray-100 p-5">

@@ -1,11 +1,15 @@
 "use client";
 import React from "react";
-import { useField } from "formik";
 import { uploadSingleFile } from "@/utils/http.util";
-import { setLocale } from "yup";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
-function InputFile({ onUpload }: { onUpload(url: string): void }) {
+function InputFile({
+  onUpload,
+  label,
+}: {
+  onUpload(url: string): void;
+  label?: string;
+}) {
   const [uploading, setUploading] = React.useState(false);
   const handleUploadFile = async (e: any) => {
     const file = e.target.files[0];
@@ -29,14 +33,17 @@ function InputFile({ onUpload }: { onUpload(url: string): void }) {
     );
 
   return (
-    <input
-      type="file"
-      className="
+    <div className="flex flex-col gap-1">
+      {label && <label className="text-gray-400 ">{label}</label>}
+      <input
+        type="file"
+        className="
          text-slate-500 text-sm leading-5 file:mr-6 file:px-4 file:py-2 file:rounded-xl
          file:text-brand-700 file:font-semibold file:border-none hover:file:bg-brand-100
        "
-      onChange={handleUploadFile}
-    />
+        onChange={handleUploadFile}
+      />
+    </div>
   );
 }
 

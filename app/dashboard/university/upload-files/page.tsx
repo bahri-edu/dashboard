@@ -5,13 +5,13 @@ import Modal from "@/components/Modal";
 import { SortableItem } from "@/components/SortableItem";
 import { useAppDispatch } from "@/store";
 import {
-  deleteLogo,
-  fetchLogo,
-  setCurrentLogo,
-  sortLogo,
-  sortLogos,
-  useLogo,
-} from "@/store/university/logo";
+  deleteUploadFile,
+  fetchUploadFiles,
+  setCurrentUploadFile,
+  sortUploadFile,
+  sortUploadFiles,
+  useUploadFile,
+} from "@/store/university";
 import { closestCenter, DndContext } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -21,45 +21,45 @@ import {
 import { PencilSquareIcon, PlusIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
 import Main from "../../Main";
-import LogoForm from "./LogoForm";
+import UploadFileForm from "./UploadFileForm";
 
-function Logo() {
+function UploadFiles() {
   const [open, setOpen] = useState(false);
 
   const dispatch = useAppDispatch();
 
-  const { logos, loading } = useLogo();
+  const { uploadFiles, loading } = useUploadFile();
 
   useEffect(() => {
-    dispatch(fetchLogo());
+    dispatch(fetchUploadFiles());
   }, []);
 
   useEffect(() => {
     if (open === false) {
-      dispatch(setCurrentLogo(null));
+      dispatch(setCurrentUploadFile(null));
     }
   }, [open]);
 
   async function editNews(id: string) {
     setOpen(true);
-    dispatch(setCurrentLogo(id));
+    dispatch(setCurrentUploadFile(id));
   }
   return (
     <>
-      <Header title="Logo">
+      <Header title="Upload Files">
         <button className="btn btn--primary mt-3" onClick={() => setOpen(true)}>
           <PlusIcon className="w-6 h-6" />
-          Add Logo Description
+          Add Upload File
         </button>
       </Header>
 
       <Modal
         open={open}
         setOpen={setOpen}
-        title="Add New Vision & Mission"
+        title="Add New Upload File"
         width="max-w-5xl"
       >
-        <LogoForm setClose={setOpen} />
+        <UploadFileForm setClose={setOpen} />
       </Modal>
       <Main>
         <div className="overflow-x-auto ">
@@ -68,7 +68,7 @@ function Logo() {
               <tr>
                 <th className="p-2 font-semibold text-left">#</th>
                 <th className="p-2 font-semibold text-left">#</th>
-                <th className="p-2 font-semibold text-left">Name</th>
+                <th className="p-2 font-semibold text-left">Title</th>
                 <th className="p-2 font-semibold text-left">Action</th>
               </tr>
             </thead>
@@ -78,25 +78,27 @@ function Logo() {
                 onDragEnd={handleDragEnd}
               >
                 <SortableContext
-                  items={logos}
+                  items={uploadFiles}
                   strategy={verticalListSortingStrategy}
                 >
-                  {logos.map((logo, x) => (
-                    <SortableItem key={logo.id} id={logo.id}>
+                  {uploadFiles.map((file, x) => (
+                    <SortableItem key={file.id} id={file.id}>
                       <td className="p-2">{x + 1}</td>
-                      <td>{logo?.title?.en}</td>
+                      <td>{file?.title?.en}</td>
 
                       <td className="p-2">
                         <div className="flex items-center gap-2">
                           <button
                             className="group"
-                            onClick={(e) => editNews(logo.id)}
+                            onClick={(e) => editNews(file.id)}
                           >
                             <PencilSquareIcon className="w-6 h-6 transform transition-all group-hover:scale-110 text-gray-500 hover:text-gray-900" />
                           </button>
                           <DeleteItem
-                            id={logo.id}
-                            dispatchAction={() => dispatch(deleteLogo(logo.id))}
+                            id={file.id}
+                            dispatchAction={() =>
+                              dispatch(deleteUploadFile(file.id))
+                            }
                           />
                         </div>
                       </td>
@@ -115,21 +117,21 @@ function Logo() {
     const { active, over } = event;
 
     if (active.id !== over.id) {
-      const activeIndex = logos.map((r) => r.id).indexOf(active.id);
-      const overIndex = logos.map((r) => r.id).indexOf(over.id);
+      const activeIndex = uploadFiles.map((r) => r.id).indexOf(active.id);
+      const overIndex = uploadFiles.map((r) => r.id).indexOf(over.id);
 
-      const items = arrayMove(logos, activeIndex, overIndex);
+      const items = arrayMove(uploadFiles, activeIndex, overIndex);
 
-      dispatch(sortLogos(items));
+      dispatch(sortUploadFiles(items));
 
       const itemsAfterSort = items.map((item, x) => ({
         id: item.id,
         seqNo: x,
       }));
 
-      dispatch(sortLogo(itemsAfterSort));
+      dispatch(sortUploadFile(itemsAfterSort));
     }
   }
 }
 
-export default Logo;
+export default UploadFiles;

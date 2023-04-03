@@ -66,6 +66,30 @@ const navigation: Navigation[] = [
         name: "University Council",
         href: "/dashboard/university/council",
       },
+      {
+        name: "Upload Fiels",
+        href: "/dashboard/university/upload-files",
+      },
+    ],
+  },
+  {
+    name: "Administration",
+    href: "/dashboard/administration",
+    current: false,
+    isMenu: true,
+    menus: [
+      {
+        name: "vice-chancellor Message",
+        href: "/dashboard/administration/vice-chancellor/message",
+      },
+      {
+        name: "Current Administration",
+        href: "/dashboard/administration/current-administration",
+      },
+      {
+        name: "University Administration",
+        href: "/dashboard/administration/university-administration",
+      },
     ],
   },
   {

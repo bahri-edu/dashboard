@@ -8,6 +8,10 @@ function InputTextarea({ label, ...props }: any) {
   const { error, touched } = meta;
   return (
     <div>
+      {(label && <label className="text-gray-400 ">{label}</label>) ||
+        (props?.placeholder && (
+          <label className="text-gray-400 ">{props.placeholder}</label>
+        ))}
       <textarea
         className="
         block
