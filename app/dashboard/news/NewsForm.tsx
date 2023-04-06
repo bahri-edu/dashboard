@@ -84,6 +84,7 @@ function NewsForm({ setClose }: { setClose(close: boolean): void }) {
 
           <InputSelect
             name="type"
+            label="Type"
             options={[
               {
                 text: "General",
@@ -93,10 +94,15 @@ function NewsForm({ setClose }: { setClose(close: boolean): void }) {
                 text: "Academic",
                 value: NewsTypeEnum.ACADEMIC,
               },
+              {
+                text: "Careers",
+                value: NewsTypeEnum.CAREERS,
+              },
             ]}
           />
 
           <InputFile
+            label="Image"
             onUpload={(url) => setValues({ ...values, images: [url] })}
           />
 

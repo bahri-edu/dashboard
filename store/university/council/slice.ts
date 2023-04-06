@@ -1,47 +1,53 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { News, NewsResponse } from "./model";
-import { createNews, deleteNews, fetchNews, updateNews } from "./thunk";
+import { Council } from "./model";
+import {
+  createCouncil,
+  deleteCouncil,
+  fetchCouncils,
+  updateCouncil,
+} from "./thunk";
 
 const initialState = {
   loading: false,
-  news: [] as News[],
+  councils: [] as Council[],
   error: null as null | string,
-  currentNewsId: null as null | string,
-  currentNews: null as null | News,
+  currentCouncilId: null as null | string,
+  currentCouncil: null as null | Council,
 };
 
-const newsSlice = createSlice({
-  name: "news",
+const councilSlice = createSlice({
+  name: "council",
   initialState,
   reducers: {
-    setCurrentNews: (
+    setCurrentCouncil: (
       state,
       { payload }: PayloadAction<string | null | undefined>
     ) => {
-      state.currentNewsId = payload || null;
-      state.currentNews = state.news.find(({ id }) => id === payload) || null;
+      state.currentCouncilId = payload || null;
+      state.currentCouncil =
+        state.councils.find(({ id }) => id === payload) || null;
     },
   },
   extraReducers: (builder) => {
     /**
      * -------------------------------------------------
-     * fetch all news
+     * fetch all
      * -------------------------------------------------
      */
-    builder.addCase(fetchNews.pending, (state) => {
+    builder.addCase(fetchCouncils.pending, (state) => {
       state.loading = true;
     });
 
     builder.addCase(
-      fetchNews.fulfilled,
-      (state, { payload: { data } }: PayloadAction<NewsResponse>) => {
+      fetchCouncils.fulfilled,
+      (state, { payload }: PayloadAction<Council[]>) => {
         state.loading = false;
-        state.news = data;
+        state.councils = payload;
         state.error = null;
       }
     );
 
-    builder.addCase(fetchNews.rejected, (state, { error }) => {
+    builder.addCase(fetchCouncils.rejected, (state, { error }) => {
       state.loading = false;
       state.error = error.message || "Error";
     });
@@ -51,20 +57,20 @@ const newsSlice = createSlice({
      * create news
      * -------------------------------------------------
      */
-    builder.addCase(createNews.pending, (state) => {
+    builder.addCase(createCouncil.pending, (state) => {
       state.loading = true;
     });
 
     builder.addCase(
-      createNews.fulfilled,
-      (state, { payload }: PayloadAction<News>) => {
+      createCouncil.fulfilled,
+      (state, { payload }: PayloadAction<Council>) => {
         state.loading = false;
-        state.news = [...state.news, payload];
+        state.councils = [...state.councils, payload];
         state.error = null;
       }
     );
 
-    builder.addCase(createNews.rejected, (state, { error }) => {
+    builder.addCase(createCouncil.rejected, (state, { error }) => {
       state.loading = false;
       state.error = error.message || "Error";
     });
@@ -74,23 +80,23 @@ const newsSlice = createSlice({
      * update news
      * -------------------------------------------------
      */
-    builder.addCase(updateNews.pending, (state) => {
+    builder.addCase(updateCouncil.pending, (state) => {
       state.loading = true;
     });
 
     builder.addCase(
-      updateNews.fulfilled,
-      (state, { payload }: PayloadAction<News>) => {
+      updateCouncil.fulfilled,
+      (state, { payload }: PayloadAction<Council>) => {
         state.loading = false;
-        state.news = state.news.map((news) => {
-          if (news.id === payload.id) return payload;
-          return news;
+        state.councils = state.councils.map((vision) => {
+          if (vision.id === payload.id) return payload;
+          return vision;
         });
         state.error = null;
       }
     );
 
-    builder.addCase(updateNews.rejected, (state, { error }) => {
+    builder.addCase(updateCouncil.rejected, (state, { error }) => {
       state.loading = false;
       state.error = error.message || "Error";
     });
@@ -100,26 +106,26 @@ const newsSlice = createSlice({
      * delete news
      * -------------------------------------------------
      */
-    builder.addCase(deleteNews.pending, (state) => {
+    builder.addCase(deleteCouncil.pending, (state) => {
       state.loading = true;
     });
 
     builder.addCase(
-      deleteNews.fulfilled,
+      deleteCouncil.fulfilled,
       (state, { payload }: PayloadAction<string>) => {
         state.loading = false;
-        state.news = state.news.filter(({ id }) => id !== payload);
+        state.councils = state.councils.filter(({ id }) => id !== payload);
         state.error = null;
       }
     );
 
-    builder.addCase(deleteNews.rejected, (state, { error }) => {
+    builder.addCase(deleteCouncil.rejected, (state, { error }) => {
       state.loading = false;
       state.error = error.message || "Error";
     });
   },
 });
 
-export const { setCurrentNews } = newsSlice.actions;
+export const { setCurrentCouncil } = councilSlice.actions;
 
-export const newsReducer = newsSlice.reducer;
+export const councilReducer = councilSlice.reducer;

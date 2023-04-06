@@ -1,6 +1,6 @@
 import { httpClient } from "@/utils/http.util";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { News, UpdateNews } from "./model";
+import { News, NewsResponse, UpdateNews } from "./model";
 
 /**
  * -------------------------------------------------------
@@ -9,7 +9,7 @@ import { News, UpdateNews } from "./model";
  */
 export const fetchNews = createAsyncThunk(
   "news/fetchNews",
-  async (): Promise<News[]> => {
+  async (): Promise<NewsResponse> => {
     try {
       const response = await httpClient("news");
 

@@ -15,6 +15,7 @@ import {
   historicalBackgroundReducer,
   factAndFigureReducer,
   uploadFileReducer,
+  councilReducer,
 } from "./university";
 import { logoReducer } from "./university/logo";
 
@@ -33,6 +34,7 @@ const store = configureStore({
     viceChancellorMessage: viceChancellorMessageReducer,
     currentAdministration: currentAdministrationReducer,
     universityAdministration: universityAdministrationReducer,
+    council: councilReducer,
   },
   devTools: true,
 });
