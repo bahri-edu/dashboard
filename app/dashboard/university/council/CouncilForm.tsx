@@ -1,7 +1,18 @@
+import InputFile from "@/components/InputFile";
+import InputSelect from "@/components/InputSelect";
 import InputText from "@/components/InputText";
 import { useAppDispatch } from "@/store";
-import { createCouncil, updateCouncil, useCouncil } from "@/store/university";
-import { initTranslate, translateValidationSchima } from "@/utils/http.util";
+import {
+  CouncilTypeEnum,
+  createCouncil,
+  updateCouncil,
+  useCouncil,
+} from "@/store/university";
+import {
+  initTranslate,
+  translateValidationSchima,
+  uploadFileUrl,
+} from "@/utils/http.util";
 import {
   ArrowPathIcon,
   BookmarkSquareIcon,
@@ -48,6 +59,9 @@ function CouncilForm({ setClose }: { setClose(close: boolean): void }) {
         descriptions: currentCouncil?.descriptions || [
           { ar: "", en: "", lists: [] },
         ],
+        image: currentCouncil?.image || "",
+        councilType:
+          currentCouncil?.councilType || CouncilTypeEnum.UNIVERSITYCOUNCIL,
       }}
       onSubmit={onSubmit}
       validationSchema={validationSchema}
@@ -205,6 +219,39 @@ function CouncilForm({ setClose }: { setClose(close: boolean): void }) {
                 </div>
               )}
             </FieldArray>
+          </div>
+
+          <InputSelect
+            name="councilType"
+            placeholder="Council Type"
+            options={[
+              {
+                text: CouncilTypeEnum.UNIVERSITYCOUNCIL,
+                value: CouncilTypeEnum.UNIVERSITYCOUNCIL,
+              },
+              {
+                text: CouncilTypeEnum.DEANSCOUNCIL,
+                value: CouncilTypeEnum.DEANSCOUNCIL,
+              },
+              {
+                text: CouncilTypeEnum.PROFESSORSCOUNCIL,
+                value: CouncilTypeEnum.PROFESSORSCOUNCIL,
+              },
+            ]}
+          />
+
+          <div className="flex gap-3">
+            {values?.image && (
+              <img
+                className="w-12 h-12 rounded-full"
+                src={uploadFileUrl + values?.image}
+                alt="image"
+              />
+            )}
+            <InputFile
+              onUpload={(url) => setFieldValue("image", url)}
+              label="Image"
+            />
           </div>
 
           <div>

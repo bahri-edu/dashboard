@@ -18,6 +18,13 @@ import {
   councilReducer,
 } from "./university";
 import { logoReducer } from "./university/logo";
+import {
+  deanshipAdministrationReducer,
+  deanshipDepartmentReducer,
+  deanshipReducer,
+  deanshipStudentServiceReducer,
+} from "./deanship";
+import { staffReducer } from "./staff";
 
 const store = configureStore({
   reducer: {
@@ -35,6 +42,11 @@ const store = configureStore({
     currentAdministration: currentAdministrationReducer,
     universityAdministration: universityAdministrationReducer,
     council: councilReducer,
+    deanship: deanshipReducer,
+    deanshipAdministration: deanshipAdministrationReducer,
+    deanshipStudentService: deanshipStudentServiceReducer,
+    deanshipDepartment: deanshipDepartmentReducer,
+    staff: staffReducer,
   },
   devTools: true,
 });

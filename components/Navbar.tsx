@@ -13,6 +13,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { DeanshipTypeEnum } from "@/store/deanship";
 
 const user = {
   name: "Tom Cook",
@@ -93,6 +94,26 @@ const navigation: Navigation[] = [
     ],
   },
   {
+    name: "Deanship",
+    href: "/dashboard/deanship",
+    current: false,
+    isMenu: true,
+    menus: [
+      {
+        name: "Deanship of libraries",
+        href: `/dashboard/deanship/${DeanshipTypeEnum.DEANSHIPOFLIBRARIES}`,
+      },
+      {
+        name: "Deanship of Scientific Research",
+        href: `/dashboard/deanship/${DeanshipTypeEnum.DEANSHIPOFSCIENTIFICRESEARCH}`,
+      },
+      {
+        name: "Deanship of Student Affairs",
+        href: `/dashboard/deanship/${DeanshipTypeEnum.DEANSHIPOFSTUDENTAFFAIRS}`,
+      },
+    ],
+  },
+  {
     name: "Electronic Service",
     href: "/dashboard/electronic-service",
     current: false,
@@ -102,6 +123,13 @@ const navigation: Navigation[] = [
   {
     name: "Related Site",
     href: "/dashboard/related-site",
+    current: false,
+    isMenu: false,
+  },
+
+  {
+    name: "Staff",
+    href: "/dashboard/staff",
     current: false,
     isMenu: false,
   },

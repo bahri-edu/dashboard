@@ -24,7 +24,7 @@ export interface UpdateCouncil {
 }
 
 export enum CouncilTypeEnum {
-  UNIVERSITYCOUNCIL = "UNIVERSITYCOUNCIL",
-  DEANSCOUNCIL = "DEANSCOUNCIL",
-  PROFESSORSCOUNCIL = "PROFESSORSCOUNCIL",
+  UNIVERSITYCOUNCIL = "university-council",
+  DEANSCOUNCIL = "deans-council",
+  PROFESSORSCOUNCIL = "professors-council",
 }
